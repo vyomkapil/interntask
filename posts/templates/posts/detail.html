@@ -9,6 +9,7 @@
         {% for comment in post.comment_set.all %}
             <li><p> By {{comment.user}}</p>
             {{ comment.comment_text }}</li>
+            <br />
         {% endfor %}
         </ul>
     {% else %}

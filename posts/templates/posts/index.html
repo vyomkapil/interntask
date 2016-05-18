@@ -3,19 +3,25 @@
 {% block head %}Home{% endblock %}
 {% block content %}
     {% if user.is_authenticated %}
-        <a href="{% url 'posts:logout' %}" class="btn btn-default" style="margin-left:90%">Sign Out</a>
-        <form action="{% url 'posts:post'%}" method="post">
-        {% csrf_token %}
+        <a href="{% url 'posts:logout' %}" class="btn btn-default" style="margin-left:90%; margin-top: 40px">Sign Out</a>
+        <br /><br /><br />
+        <form action="{% url 'posts:post'%}" method="post" style="margin-left: 40px">
+            {% csrf_token %}
             ​<textarea name="txtArea" id="txtArea" rows="10" cols="70"></textarea><br />
-        <input type="submit" value="Post" />
+            <input type="submit" value="Post" />
         </form>
         <br />
         <br />
         {% if latest_post_list %}
             <ul>
             {% for post in latest_post_list %}
-                <li><p> By {{post.user}}</p>
-                <a href="{% url 'posts:detail' post.id %}">{{ post.post_text }}</a></li>
+                <a href="{% url 'posts:detail' post.id %}">
+                    <div style="height: auto; width: 50%; border: 1px solid black; padding: 10px">
+                            <p> By {{post.user}}</p>
+                            <p>{{ post.post_text }}</p>
+                    </div>
+                </a>
+                <br />
             {% endfor %}
             </ul>
         {% else %}
