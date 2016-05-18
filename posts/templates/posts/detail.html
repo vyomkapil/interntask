@@ -1,0 +1,25 @@
+{% extends 'posts/base.html' %}
+{% load staticfiles %}
+{% block head %}Detail{% endblock %}
+{% block content %}
+    <h3>{{ post.post_text }}</h3>
+    <h6>Comments:-</h6>
+    {% if post.comment_set.all %}
+        <ul>
+        {% for comment in post.comment_set.all %}
+            <li><p> By {{comment.user}}</p>
+            {{ comment.comment_text }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+            <p>No Comments are available.</p>
+    {% endif %}
+    <form action="{% url 'posts:comment' post.id %}" method="post">
+        {% csrf_token %}
+        ​<textarea name="txtArea" id="txtArea" rows="10" cols="70"></textarea><br />
+        <input type="submit" value="Comment" />
+    </form>
+    <br />
+    <br />
+    <a href="{% url 'posts:index' %}" class="btn btn-default">Back to home</a>
+{% endblock %}
